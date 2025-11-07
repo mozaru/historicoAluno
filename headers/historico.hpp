@@ -21,7 +21,9 @@ class Historico
        void alterar(string matricula, const Disciplina &d);
        bool existe(string matricula) const;
        double cr() const;
-       void listar() const;
+       const Disciplina& getDisciplina(int pos) const;
+       const Disciplina& getDisciplina(string matricula) const;
+       int getQtd() const ;
 };
 
 #endif

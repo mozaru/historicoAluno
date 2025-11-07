@@ -14,6 +14,19 @@ Historico::Historico()
 // Destrutor
 Historico::~Historico() {}
 
+const Disciplina &Historico::getDisciplina(int pos) const
+{
+    return vet[pos];
+}
+int Historico::getQtd() const 
+{
+    return qtd;
+}
+const Disciplina& Historico::getDisciplina(string matricula) const
+{
+    return vet[obterIndice(matricula)];
+}
+
 int Historico::obterIndice(string matricula) const
 {
     for (int i = 0; i < qtd; i++)
@@ -82,24 +95,4 @@ double Historico::cr() const
     }
 
     return (somaCreditos == 0)? 0.0 : somaPonderada / somaCreditos;
-}
-
-// Listar todas as disciplinas
-void Historico::listar() const
-{
-    cout << left << setw(12) << "Matricula"
-         << setw(25) << "Nome"
-         << setw(10) << "Creditos"
-         << setw(10) << "Ano"
-         << setw(10) << "Semestre"
-         << setw(10) << "Media"
-         << endl;
-    cout << string(77, '-') << endl;
-
-    for (int i = 0; i < qtd; i++)
-        vet[i].mostrar();
-
-    cout << string(77, '-') << endl;
-    cout << "CR do aluno: " << fixed << setprecision(2) << cr() << endl;
-    cout << string(77, '-') << endl;
 }

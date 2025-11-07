@@ -21,66 +21,66 @@ entidades:
 #include<iostream>
 #include<string>
 #include<iomanip>
+#include<sstream>
 
-#include"menu.hpp"
 #include"utils.hpp"
 #include"disciplina.hpp"
 #include"historico.hpp"
 
+#include"UIConsole.hpp"
+#include"UIConsoleTosca.hpp"
+#include"UIConsoleMaisOuMenos.hpp"
 
 using namespace std;
-
 
 int main()
 {
     Historico historico;
     string matricula;
     Disciplina d;
-    double resultado;
     bool fim = false;
+    stringstream ss;
+    UIConsoleMaisOuMenos GUI;
     do
     {
-        switch (menu())
+        switch (GUI.menu())
         {
           case 1:
-            d.ler();
-            historico.inserir(d);
+            d.clear();
+            if (GUI.editar(d))
+              historico.inserir(d);
             break;
           case 2:
-            cout << "Digite a matricula da disciplina a remover: ";
-            getline(cin, matricula);
+            matricula = GUI.solicitarMatricula();
             if (!historico.existe(matricula))
-               cout << "disciplina não encontrada para remover\n";
+               GUI.mostrarAlerta("disciplina não encontrada para remover");
             else
                historico.remover(matricula);
             break;
           case 3:
-            cout << "Digite a matricula da disciplina a alterar: ";
-            getline(cin, matricula);
+            matricula = GUI.solicitarMatricula();
             if (!historico.existe(matricula))
-               cout << "disciplina não encontrada para alteracao\n";
+               GUI.mostrarAlerta("disciplina não encontrada para alteracao");
             else
             {
-               cout << "Digite os novos dados da disciplina:\n";
-               d.ler();
-               historico.alterar(matricula, d);
+              d = historico.getDisciplina(matricula);
+              if (GUI.editar(d))
+                historico.alterar(matricula, d);
             }
             break;
           case 4:
-            historico.listar();
-            pausar();
+            GUI.listar(historico);
             break;
           case 5:
-            resultado = historico.cr();
-            cout << "CR do aluno: " << fixed << setprecision(2) << resultado << endl;
-            pausar();
+            ss << "CR do aluno: " << fixed << setprecision(2) << historico.cr();
+            GUI.mostrarInfo(ss.str());
             break;
           case 6:
-            cout << "Encerrando o programa...\n";
+            GUI.mostrarInfo("Encerrando o programa...\n");
             fim = true;
             break;
           default:
-            cout << "Opcao invalida!\n";
+            GUI.mostrarAlerta("Opcao invalida!\n");
             break;
         }
     } while (!fim);

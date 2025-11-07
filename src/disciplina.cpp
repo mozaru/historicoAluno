@@ -28,44 +28,9 @@ void Disciplina::setNota2(double valor) 	{ nota2 = valor; 	}
 double Disciplina::media() const                { return (nota1 + nota2) / 2.0; }
 
 
-double lerNota(string label)
+void Disciplina::clear()
 {
-    double nota;
-    do {
-      cout << label;
-      cin >> nota;
-      if (nota<0 || nota>10)
-        cout << "nota invalida ela deve estar entre 0 e 10" << endl;
-    }while (nota<0 || nota>10);
-    return nota;
-}
-
-// Leitura dos dados da disciplina
-void Disciplina::ler()
-{
-    cout << "Nome da disciplina: ";
-    getline(cin, nome);
-    cout << "Matricula: ";
-    getline(cin, matricula);
-    cout << "Creditos: ";
-    cin >> creditos;
-    cout << "Ano: ";
-    cin >> ano;
-    cout << "Semestre: ";
-    cin >> semestre;
-    nota1 = lerNota("Nota1: ");
-    nota2 = lerNota("Nota2: ");
-    cin.ignore();
-}
-
-// Exibição dos dados
-void Disciplina::mostrar() const
-{
-    cout << left << setw(12) << matricula
-         << setw(25) << nome
-         << setw(10) << creditos
-         << setw(10) << ano
-         << setw(10) << semestre
-         << setw(10) << fixed << setprecision(2) << media()
-         << endl;
+    nome = matricula = "";
+    ano = creditos = semestre = 0;
+    nota1=nota2 = 0;
 }

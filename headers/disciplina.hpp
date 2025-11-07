@@ -34,8 +34,7 @@ class Disciplina
 
       double media() const;
 
-      void   mostrar() const;
-      void   ler();
+      void clear();
 };
 
 #endif
