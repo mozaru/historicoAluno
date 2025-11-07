@@ -43,7 +43,7 @@ void TelaMessage::desenhar() {
     std::cout << titulo;
 
     int maxLen = 0;
-    for(const auto v : campos)
+    for(const std::string& v : campos)
     {
        int len = static_cast<int>(v.size());
        if (len>maxLen) maxLen = len;
