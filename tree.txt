@@ -1,0 +1,85 @@
+Listagem de caminhos de pasta para o volume Projetos
+O número de série do volume é 00000202 4E23:5370
+D:.
+¦   .gitignore
+¦   arquitetura.md
+¦   CMakeLists.txt
+¦   LICENSE
+¦   Makefile
+¦   patterns.md
+¦   README.md
+¦   tree.txt
+¦   visao_escopo.md
+¦   
++---include
+¦   +---core
+¦   ¦       Conversion.hpp
+¦   ¦       Errors.hpp
+¦   ¦       
+¦   +---entities
+¦   ¦       Disciplina.hpp
+¦   ¦       
+¦   +---logging
+¦   ¦       ILogger.hpp
+¦   ¦       
+¦   +---repositories
+¦   ¦       IDisciplinaRepository.hpp
+¦   ¦       
+¦   +---services
+¦   ¦       IHistoricoService.hpp
+¦   ¦       
+¦   +---uis
+¦           IUserInterface.hpp
+¦           
++---src
+    ¦   main.cpp
+    ¦   
+    +---core
+    ¦       Conversion.cpp
+    ¦       
+    +---entities
+    ¦       Disciplina.cpp
+    ¦       
+    +---logging
+    ¦       ConsoleLogger.cpp
+    ¦       FileLogger.cpp
+    ¦       
+    +---repositories
+    ¦   +---bin
+    ¦   +---cvs
+    ¦   +---fixed
+    ¦   +---json
+    ¦   +---memory
+    ¦   ¦       MemoryDisciplinaRepository.cpp
+    ¦   ¦       MemoryDisciplinaRepository.hpp
+    ¦   ¦       
+    ¦   +---sqlite
+    ¦   +---xml
+    +---services
+    ¦       HistoricoService.cpp
+    ¦       HistoricoService.hpp
+    ¦       
+    +---uis
+        +---console
+        ¦       UIConsole.cpp
+        ¦       UIConsole.hpp
+        ¦       
+        +---cpp-terminal
+        +---ftxui
+        +---not-cursors
+        +---terminal
+        ¦       IUITerminalForm.hpp
+        ¦       terminal.cpp
+        ¦       terminal.hpp
+        ¦       UITerminal.cpp
+        ¦       UITerminal.hpp
+        ¦       UITerminalForm.cpp
+        ¦       UITerminalForm.hpp
+        ¦       UITerminalList.cpp
+        ¦       UITerminalList.hpp
+        ¦       UITerminalMenu.cpp
+        ¦       UITerminalMenu.hpp
+        ¦       UITerminalMessage.cpp
+        ¦       UITerminalMessage.hpp
+        ¦       
+        +---web
