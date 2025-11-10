@@ -160,7 +160,6 @@ cmake -S . -B build \
 
 cmake --build build
 ```
-
 Para build de Release (com link estático quando possível):
 
 ```bash
@@ -191,4 +190,21 @@ Opções esperadas (conceito):
 O comportamento da UI e do repositório em cada build depende da configuração feita no CMake (apenas uma combinação ativa por executável).
 
 Para o fluxo funcional e exemplos de uso, consulte `arquitetura.md`.
+
+
+## HOJE
+Fazer um destes para preparar o build
+ - `cmake -S . -B build_release -DCMAKE_BUILD_TYPE=Release -DUI_IMPLEMENTATION=console -DSTATIC_LINK=ON`
+ - `cmake -S . -B build_release -DCMAKE_BUILD_TYPE=Release -DUI_IMPLEMENTATION=terminal -DSTATIC_LINK=ON`
+ - `cmake -S . -B build_release -DCMAKE_BUILD_TYPE=Release -DUI_IMPLEMENTATION=cpp-terminal -DSTATIC_LINK=ON`
+
+segue as explicacoes:
+ - `-S .` -> diretorio do corrente sendo o do source  
+ - `-B build_release` -> configura o diretorio do build  
+ - `-DCMAKE_BUILD_TYPE=Release` -> -D define a variavel CMAKE_BUILD_TYPE para Release  
+ - `-DSTATIC_LINK` -> -D define a variavel STATIC_LINK para ON, ou seja, link statico, sem dlls tudo no exe.  
+ - `-DUI_IMPLEMENTATION=xxxx` -> -D define a variavel UI_IMPLEMENTATION para o tipo de interface com usuario  
+
+depois fazer o build  
+`cmake --build build_release`
 
