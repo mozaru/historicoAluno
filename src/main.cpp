@@ -7,7 +7,33 @@
 #include "MemoryDisciplinaRepository.hpp"
 #include "HistoricoService.hpp"
 #include "FileLogger.hpp"
-#include "UITerminal.hpp"
+
+#if defined(UI_IMPLEMENTATION_CONSOLE)
+    #include "UIConsole.hpp"
+    using UIType = UIConsole;
+
+#elif defined(UI_IMPLEMENTATION_TERMINAL)
+    #include "UITerminal.hpp"
+    using UIType = UITerminal;
+
+#elif defined(UI_IMPLEMENTATION_CPP_TERMINAL)
+    #include "UICppTerminal.hpp"
+    using UIType = UICppTerminal;
+
+#elif defined(UI_IMPLEMENTATION_FTXUI)
+    #include "UIFtxui.hpp"
+    using UIType = UIFtxui;          // ajustar quando implementar
+
+#elif defined(UI_IMPLEMENTATION_NOT_CURSORS)
+    #include "UINotCursors.hpp"
+    using UIType = UINotCursors;     // ajustar quando implementar
+
+#elif defined(UI_IMPLEMENTATION_WEB)
+    #include "UIWeb.hpp"
+    using UIType = UIWeb;            // ajustar quando implementar
+#else
+    #error "Nenhuma UI_IMPLEMENTATION_* definida. Defina, por exemplo: -DUI_IMPLEMENTATION_CPP_TERMINAL"
+#endif
 
 int main(int argc, char** argv)
 {
@@ -22,7 +48,7 @@ int main(int argc, char** argv)
     HistoricoService historicoService(repo, logger);
 
     // 4. Criar a UI concreta com as dependências
-    UITerminal ui(historicoService, logger);
+    UIType ui(historicoService, logger);
 
     // 5. Deixar a UI assumir o controle
     ui.run();

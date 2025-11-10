@@ -7,8 +7,6 @@
 #include"Disciplina.hpp"
 #include"IDisciplinaRepository.hpp"
 
-using namespace std;
-
 const int MAX_DISCIPLINAS=100; 
 
 class MemoryDisciplinaRepository : public IDisciplinaRepository

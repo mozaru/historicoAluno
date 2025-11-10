@@ -42,3 +42,6 @@
 
 build/
 obj/
+debug/
+release/
+build*/

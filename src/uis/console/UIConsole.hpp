@@ -1,13 +1,11 @@
-#ifndef _IUI_CONSOLE_HPP_
-#define _IUI_CONSOLE_HPP_
+#ifndef _UI_CONSOLE_HPP_
+#define _UI_CONSOLE_HPP_
 
 #include<string>
 #include "ILogger.hpp"
 #include"Disciplina.hpp"
 #include"IUserInterface.hpp"
 #include"IHistoricoService.hpp"
-
-using namespace std;
 
 class UIConsole : public IUserInterface
 {
@@ -19,8 +17,8 @@ class UIConsole : public IUserInterface
         bool editar(Disciplina &disc) const;
         int solicitarId() const;
         void listar() const;
-        void mostrarInfo(string info) const;
-        void mostrarAlerta(string info) const;
+        void mostrarInfo(std::string info) const;
+        void mostrarAlerta(std::string info) const;
     public:
         UIConsole(IHistoricoService& aHistoricoService, ILogger& aLog);
         void run();

@@ -8,7 +8,7 @@ using namespace std;
 
 int Disciplina::getId() const 			{ return id; 		}
 string Disciplina::getNome() const		{ return nome; 		}
-string Disciplina::getMatricula() const	{ return matricula; 	}
+string Disciplina::getMatricula() const	{ return matricula; }
 int Disciplina::getCreditos() const		{ return creditos; 	}
 int Disciplina::getSemestre() const		{ return semestre; 	}
 int Disciplina::getAno() const 			{ return ano; 		}

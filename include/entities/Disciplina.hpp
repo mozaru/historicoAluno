@@ -3,14 +3,12 @@
 
 #include<string>
 
-using namespace std;
-
 class Disciplina
 {
    private:
       int    id;
-      string nome;
-      string matricula;
+      std::string nome;
+      std::string matricula;
       int    creditos;
       int    semestre;
       int    ano;
@@ -19,8 +17,8 @@ class Disciplina
       double media;
    public:
       int    getId() const;
-      string getNome() const; 
-      string getMatricula() const; 
+      std::string getNome() const; 
+      std::string getMatricula() const; 
       int    getCreditos() const; 
       int    getSemestre() const; 
       int    getAno() const; 
@@ -29,8 +27,8 @@ class Disciplina
       double getMedia() const;
 
       void   setId(int valor);
-      void   setNome(string valor); 
-      void   setMatricula(string valor); 
+      void   setNome(std::string valor); 
+      void   setMatricula(std::string valor); 
       void   setCreditos(int valor); 
       void   setSemestre(int valor); 
       void   setAno(int valor); 

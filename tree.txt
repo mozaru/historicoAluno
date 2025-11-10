@@ -1,6 +1,4 @@
-Listagem de caminhos de pasta para o volume Projetos
-O número de série do volume é 00000202 4E23:5370
-D:.
+historicoAluno
 ¦   .gitignore
 ¦   arquitetura.md
 ¦   CMakeLists.txt
@@ -42,7 +40,9 @@ D:.
     ¦       
     +---logging
     ¦       ConsoleLogger.cpp
+    ¦       ConsoleLogger.hpp
     ¦       FileLogger.cpp
+    ¦       FileLogger.hpp
     ¦       
     +---repositories
     ¦   +---bin

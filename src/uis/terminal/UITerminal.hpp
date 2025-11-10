@@ -7,8 +7,6 @@
 #include"IUserInterface.hpp"
 #include"IHistoricoService.hpp"
 
-using namespace std;
-
 class UITerminal : public IUserInterface 
 {
     private:
@@ -18,8 +16,8 @@ class UITerminal : public IUserInterface
         bool editar(Disciplina &disc) const;
         int solicitarId() const;
         void listar() const;
-        void mostrarInfo(string info) const;
-        void mostrarAlerta(string info) const;
+        void mostrarInfo(std::string info) const;
+        void mostrarAlerta(std::string info) const;
     public:
         UITerminal(IHistoricoService& aHistoricoService, ILogger& aLog);
         void run();

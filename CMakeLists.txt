@@ -6,12 +6,54 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# UI_IMPLEMENTATION é passado via linha de comando do CMake, ex:
+#   cmake -DUI_IMPLEMENTATION=cpp-terminal ..
+# Valores suportados: console, terminal, cpp-terminal, ftxui, not-cursors, web
+
+
 # Coleta recursiva dos fontes em src/
 file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
     ${CMAKE_SOURCE_DIR}/src/*.cpp
 )
 
 add_executable(historico ${SRC_FILES})
+
+# Adiciona o cpp-terminal como subprojeto
+add_subdirectory(external/cpp-terminal)
+
+# Linka com a UI que usa cpp-terminal
+target_link_libraries(historico PRIVATE cpp-terminal::cpp-terminal)
+
+# Seleção da implementação de UI -> define macro para o código
+if (NOT UI_IMPLEMENTATION)
+    set(UI_IMPLEMENTATION "console")
+endif()
+
+message(STATUS "UI_IMPLEMENTATION = ${UI_IMPLEMENTATION}")
+
+if (UI_IMPLEMENTATION STREQUAL "console")
+    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_CONSOLE)
+
+elseif (UI_IMPLEMENTATION STREQUAL "terminal")
+    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_TERMINAL)
+
+elseif (UI_IMPLEMENTATION STREQUAL "cpp-terminal")
+    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_CPP_TERMINAL)
+
+elseif (UI_IMPLEMENTATION STREQUAL "ftxui")
+    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_FTXUI)
+
+elseif (UI_IMPLEMENTATION STREQUAL "not-cursors")
+    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_NOT_CURSORS)
+
+elseif (UI_IMPLEMENTATION STREQUAL "web")
+    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_WEB)
+
+else()
+    message(FATAL_ERROR "Valor invalido para UI_IMPLEMENTATION: ${UI_IMPLEMENTATION}")
+endif()
+
+
 
 # Diretórios de include:
 # Todos os includes são feitos sem diretório (ex: #include "Disciplina.hpp"),
