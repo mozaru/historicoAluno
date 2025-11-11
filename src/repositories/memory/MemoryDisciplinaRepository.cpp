@@ -6,7 +6,7 @@
 
 using namespace std;
 
-MemoryDisciplinaRepository::MemoryDisciplinaRepository(ILogger& aLog)
+MemoryDisciplinaRepository::MemoryDisciplinaRepository(ILogger& aLog, const Configuracao& conf)
     : log(aLog), qtd(0), lastId(0)
 {
 }

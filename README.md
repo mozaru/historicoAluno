@@ -196,7 +196,9 @@ Para o fluxo funcional e exemplos de uso, consulte `arquitetura.md`.
 Fazer um destes para preparar o build
  - `cmake -S . -B build_release -DCMAKE_BUILD_TYPE=Release -DUI_IMPLEMENTATION=console -DSTATIC_LINK=ON`
  - `cmake -S . -B build_release -DCMAKE_BUILD_TYPE=Release -DUI_IMPLEMENTATION=terminal -DSTATIC_LINK=ON`
- - `cmake -S . -B build_release -DCMAKE_BUILD_TYPE=Release -DUI_IMPLEMENTATION=cpp-terminal -DSTATIC_LINK=ON`
+ - `cmake -S . -B build_release -DCMAKE_BUILD_TYPE=Release -DUI_IMPLEMENTATION=cpp-terminal 
+ -DSTATIC_LINK=ON`
+- `cmake -S . -B build_release -DCMAKE_BUILD_TYPE=Release -DUI_IMPLEMENTATION=ftxui -DREPOSITORY_IMPLEMENTATION=bin`
 
 segue as explicacoes:
  - `-S .` -> diretorio do corrente sendo o do source  

@@ -5,6 +5,7 @@
 #include "ILogger.hpp"
 #include <fstream>
 #include <string>
+#include "Configuracao.hpp"
 
 class FileLogger : public ILogger {
     private:
@@ -13,7 +14,7 @@ class FileLogger : public ILogger {
 
         void write(const char* level, const std::string& message);
     public:
-        explicit FileLogger(bool aVerbose=false, const std::string& aFilename="");
+        explicit FileLogger(const Configuracao& conf);
         ~FileLogger() override;
 
         bool isOpen() const noexcept;

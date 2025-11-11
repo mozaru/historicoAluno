@@ -6,6 +6,7 @@
 #include "ILogger.hpp"
 #include"Disciplina.hpp"
 #include"IDisciplinaRepository.hpp"
+#include"Configuracao.hpp"
 
 const int MAX_DISCIPLINAS=100; 
 
@@ -18,7 +19,7 @@ class MemoryDisciplinaRepository : public IDisciplinaRepository
         int        lastId;
         int obterIndice(int id) const; 
     public:
-        MemoryDisciplinaRepository(ILogger& aLog);
+        MemoryDisciplinaRepository(ILogger& aLog, const Configuracao& conf);
         ~MemoryDisciplinaRepository();
 
         int insert(const Disciplina& disciplina);

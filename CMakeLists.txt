@@ -44,7 +44,13 @@ target_include_directories(historico
 # =========================================
 if (REPOSITORY_IMPLEMENTATION STREQUAL "memory")
     add_subdirectory(${CMAKE_SOURCE_DIR}/src/repositories/memory)
+    target_compile_definitions(historico PRIVATE REPOSITORY_IMPLEMENTATION_MEMORY)
     target_link_libraries(historico PRIVATE repo_memory)
+
+elseif (REPOSITORY_IMPLEMENTATION STREQUAL "bin")
+    add_subdirectory(${CMAKE_SOURCE_DIR}/src/repositories/bin)
+    target_compile_definitions(historico PRIVATE REPOSITORY_IMPLEMENTATION_BINARY)
+    target_link_libraries(historico PRIVATE repo_bin)
 
 else()
     message(FATAL_ERROR "REPOSITORY_IMPLEMENTATION invalido: ${REPOSITORY_IMPLEMENTATION}")
@@ -113,6 +119,10 @@ target_include_directories(historico PRIVATE ${HEADER_DIRS})
 # Se os targets existirem, herdando os mesmos includes:
 if (TARGET repo_memory)
     target_include_directories(repo_memory PUBLIC ${HEADER_DIRS})
+endif()
+
+if (TARGET repo_bin)
+    target_include_directories(repo_bin PUBLIC ${HEADER_DIRS})
 endif()
 
 if (TARGET ui_console)

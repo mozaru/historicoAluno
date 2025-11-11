@@ -3,11 +3,17 @@
 #include <ctime>
 #include <iomanip>
 #include <sstream>
+#include "Uteis.hpp"
 
-FileLogger::FileLogger(bool aVerbose, const std::string& aFilename)
-    : verbose(aVerbose)
+FileLogger::FileLogger(const Configuracao &conf)
+    : verbose(conf.isVerbose())
 {
-    std::string filename = aFilename;
+    std::string path = conf.getLogPath();
+    std::string prefix = conf.getLogPrefix();
+    std::string filename = "";
+
+    if (prefix.empty())
+       prefix = "log_historico_";
 
     if (filename.empty()) {
         using namespace std::chrono;
@@ -22,12 +28,14 @@ FileLogger::FileLogger(bool aVerbose, const std::string& aFilename)
 #endif
 
         std::ostringstream oss;
-        oss << "log_historico_"
+        oss << prefix
             << std::put_time(&tm, "%Y%m%d_%H%M%S")
             << ".log";
 
         filename = oss.str();
     }
+
+    filename = joinPath(path,filename);
 
     file_.open(filename, std::ios::app);
 }

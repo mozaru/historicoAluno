@@ -3,12 +3,13 @@
 
 #include "ILogger.hpp"
 #include <string>
+#include "Configuracao.hpp"
 
 class ConsoleLogger : public ILogger {
     private:
         bool verbose;
     public:
-        explicit ConsoleLogger(bool aVerbose=false);
+        explicit ConsoleLogger(const Configuracao& conf);
         ~ConsoleLogger() override = default;
 
         void logInfo(const std::string& message) override;

@@ -7,7 +7,7 @@ namespace {
     }
 }
 
-ConsoleLogger::ConsoleLogger(bool aVerbose) : verbose(aVerbose)
+ConsoleLogger::ConsoleLogger(const Configuracao& conf) : verbose(conf.isVerbose())
 {}
 
 void ConsoleLogger::logInfo(const std::string& message) {

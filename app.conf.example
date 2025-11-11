@@ -1,0 +1,7 @@
+# comentario
+VERBOSE=yes
+CONNECTION_STRING=dados.db
+FILE_NAME=dados.bin
+LOG_TYPE=console
+LOG_PREFIX=log_historico
+LOG_PATH=
