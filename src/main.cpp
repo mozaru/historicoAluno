@@ -27,15 +27,11 @@
 
 #elif defined(UI_IMPLEMENTATION_FTXUI)
     #include "UIFtxui.hpp"
-    using UIType = ui::ftxuiui::UIFtxui;          // ajustar quando implementar
-
-#elif defined(UI_IMPLEMENTATION_NOTCURSES)
-    #include "UINotcurses.hpp"
-    using UIType = UINotcurses;     // ajustar quando implementar
+    using UIType = ui::ftxuiui::UIFtxui;
 
 #elif defined(UI_IMPLEMENTATION_WEB)
     #include "UIWeb.hpp"
-    using UIType = UIWeb;            // ajustar quando implementar
+    using UIType = UIWeb;
 #else
     #error "Nenhuma UI_IMPLEMENTATION_* definida. Defina, por exemplo: -DUI_IMPLEMENTATION=console|terminal|cpp-terminal|ftxui|notcurser|web"
 #endif
