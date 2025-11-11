@@ -57,6 +57,11 @@ elseif (REPOSITORY_IMPLEMENTATION STREQUAL "fixed")
     target_compile_definitions(historico PRIVATE REPOSITORY_IMPLEMENTATION_FIXED)
     target_link_libraries(historico PRIVATE repo_fixed)
 
+elseif (REPOSITORY_IMPLEMENTATION STREQUAL "csv")
+    add_subdirectory(${CMAKE_SOURCE_DIR}/src/repositories/csv)
+    target_compile_definitions(historico PRIVATE REPOSITORY_IMPLEMENTATION_CSV)
+    target_link_libraries(historico PRIVATE repo_csv)    
+
 else()
     message(FATAL_ERROR "REPOSITORY_IMPLEMENTATION invalido: ${REPOSITORY_IMPLEMENTATION}")
 endif()
@@ -134,6 +139,9 @@ if (TARGET repo_fixed)
     target_include_directories(repo_fixed PUBLIC ${HEADER_DIRS})
 endif()
 
+if (TARGET repo_csv)
+    target_include_directories(repo_csv PUBLIC ${HEADER_DIRS})
+endif()
 
 if (TARGET ui_console)
     target_include_directories(ui_console PUBLIC ${HEADER_DIRS})
