@@ -67,6 +67,16 @@ elseif (REPOSITORY_IMPLEMENTATION STREQUAL "sqlite")
     target_compile_definitions(historico PRIVATE REPOSITORY_IMPLEMENTATION_SQLITE)
     target_link_libraries(historico PRIVATE repo_sqlite)
 
+elseif (REPOSITORY_IMPLEMENTATION STREQUAL "json")
+    add_subdirectory(${CMAKE_SOURCE_DIR}/src/repositories/json)
+    target_compile_definitions(historico PRIVATE REPOSITORY_IMPLEMENTATION_JSON)
+    target_link_libraries(historico PRIVATE repo_json)    
+
+elseif (REPOSITORY_IMPLEMENTATION STREQUAL "xml")
+    add_subdirectory(${CMAKE_SOURCE_DIR}/src/repositories/xml)
+    target_compile_definitions(historico PRIVATE REPOSITORY_IMPLEMENTATION_XML)
+    target_link_libraries(historico PRIVATE repo_xml)    
+
 else()
     message(FATAL_ERROR "REPOSITORY_IMPLEMENTATION invalido: ${REPOSITORY_IMPLEMENTATION}")
 endif()
@@ -150,6 +160,14 @@ endif()
 
 if (TARGET repo_sqlite)
     target_include_directories(repo_sqlite PUBLIC ${HEADER_DIRS})
+endif()
+
+if (TARGET repo_json)
+    target_include_directories(repo_json PUBLIC ${HEADER_DIRS})
+endif()
+
+if (TARGET repo_xml)
+    target_include_directories(repo_xml PUBLIC ${HEADER_DIRS})
 endif()
 
 if (TARGET ui_console)
