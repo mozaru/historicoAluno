@@ -70,11 +70,19 @@ void HistoricoService::remove(int id)
     LOG_INF("remove: ok, id=", id)
 }
 
+namespace {
+    double calcularMedia(const Disciplina& d)
+    {
+        return (d.getNota1()+d.getNota2())/2;
+    }
+}
+
 Disciplina HistoricoService::get(int id) const
 {
     LOG_DBG("get: id=", id)
     // Se nao existir, o repositorio lanca InfraError
-    const Disciplina &d = repo.get(id);
+    Disciplina d = repo.get(id);
+    d.setMedia(calcularMedia(d));
     LOG_INF("get: retornou nome=", d.getNome())
     return d;
 }
@@ -83,6 +91,8 @@ std::vector<Disciplina> HistoricoService::list() const
 {
     LOG_DBG("list: inicio");
     auto lst = repo.list();
+    for(Disciplina& d : lst)
+       d.setMedia(calcularMedia(d));
     LOG_INF("list: retornou ", lst.size(), " disciplinas");
     return lst;
 }

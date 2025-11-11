@@ -1,63 +1,98 @@
 cmake_minimum_required(VERSION 3.16)
 project(historico_tui CXX)
 
-# C++ padrão
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# UI_IMPLEMENTATION é passado via linha de comando do CMake, ex:
-#   cmake -DUI_IMPLEMENTATION=cpp-terminal ..
-# Valores suportados: console, terminal, cpp-terminal, ftxui, not-cursors, web
-
-
-# Coleta recursiva dos fontes em src/
-file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
-    ${CMAKE_SOURCE_DIR}/src/*.cpp
-)
-
-add_executable(historico ${SRC_FILES})
-
-# Adiciona o cpp-terminal como subprojeto
-add_subdirectory(external/cpp-terminal)
-
-# Linka com a UI que usa cpp-terminal
-target_link_libraries(historico PRIVATE cpp-terminal::cpp-terminal)
-
-# Seleção da implementação de UI -> define macro para o código
+# =========================================
+# Seleção de implementação
+# =========================================
 if (NOT UI_IMPLEMENTATION)
     set(UI_IMPLEMENTATION "console")
 endif()
 
+if (NOT REPOSITORY_IMPLEMENTATION)
+    set(REPOSITORY_IMPLEMENTATION "memory")
+endif()
+
 message(STATUS "UI_IMPLEMENTATION = ${UI_IMPLEMENTATION}")
+message(STATUS "REPOSITORY_IMPLEMENTATION = ${REPOSITORY_IMPLEMENTATION}")
 
-if (UI_IMPLEMENTATION STREQUAL "console")
-    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_CONSOLE)
+# =========================================
+# Core: todos os .cpp de src/, exceto uis/ e repositories/
+# =========================================
+file(GLOB_RECURSE CORE_SOURCES CONFIGURE_DEPENDS
+    ${CMAKE_SOURCE_DIR}/src/*.cpp
+)
 
-elseif (UI_IMPLEMENTATION STREQUAL "terminal")
-    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_TERMINAL)
+list(FILTER CORE_SOURCES EXCLUDE REGEX ".*/src/uis/.*")
+list(FILTER CORE_SOURCES EXCLUDE REGEX ".*/src/repositories/.*")
 
-elseif (UI_IMPLEMENTATION STREQUAL "cpp-terminal")
-    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_CPP_TERMINAL)
+add_executable(historico
+    ${CORE_SOURCES}
+)
 
-elseif (UI_IMPLEMENTATION STREQUAL "ftxui")
-    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_FTXUI)
+target_include_directories(historico
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/src
+)
 
-elseif (UI_IMPLEMENTATION STREQUAL "not-cursors")
-    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_NOT_CURSORS)
-
-elseif (UI_IMPLEMENTATION STREQUAL "web")
-    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_WEB)
+# =========================================
+# Repository (cada um no seu subdiretorio)
+# =========================================
+if (REPOSITORY_IMPLEMENTATION STREQUAL "memory")
+    add_subdirectory(${CMAKE_SOURCE_DIR}/src/repositories/memory)
+    target_link_libraries(historico PRIVATE repo_memory)
 
 else()
-    message(FATAL_ERROR "Valor invalido para UI_IMPLEMENTATION: ${UI_IMPLEMENTATION}")
+    message(FATAL_ERROR "REPOSITORY_IMPLEMENTATION invalido: ${REPOSITORY_IMPLEMENTATION}")
+endif()
+
+# =========================================
+# UI (cada uma no seu subdiretorio)
+# =========================================
+if (UI_IMPLEMENTATION STREQUAL "console")
+    add_subdirectory(${CMAKE_SOURCE_DIR}/src/uis/console)
+    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_CONSOLE)
+    target_link_libraries(historico PRIVATE ui_console)
+
+elseif (UI_IMPLEMENTATION STREQUAL "terminal")
+    add_subdirectory(${CMAKE_SOURCE_DIR}/src/uis/terminal)
+    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_TERMINAL)
+    target_link_libraries(historico PRIVATE ui_terminal)
+
+elseif (UI_IMPLEMENTATION STREQUAL "cpp-terminal")
+    add_subdirectory(${CMAKE_SOURCE_DIR}/external/cpp-terminal)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/src/uis/cpp-terminal)
+    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_CPP_TERMINAL)
+    target_link_libraries(historico PRIVATE
+        ui_cpp_terminal
+        cpp-terminal::cpp-terminal
+    )
+
+elseif (UI_IMPLEMENTATION STREQUAL "ftxui")
+    add_subdirectory(${CMAKE_SOURCE_DIR}/external/ftxui)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/src/uis/ftxui)
+    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_FTXUI)
+    target_link_libraries(historico PRIVATE ui_ftxui)
+
+elseif (UI_IMPLEMENTATION STREQUAL "not-cursors")
+    message(FATAL_ERROR "UI_IMPLEMENTATION=not-cursors ainda nao implementada.")
+
+elseif (UI_IMPLEMENTATION STREQUAL "web")
+    message(FATAL_ERROR "UI_IMPLEMENTATION=web ainda nao implementada.")
+
+else()
+    message(FATAL_ERROR "UI_IMPLEMENTATION invalido: ${UI_IMPLEMENTATION}")
 endif()
 
 
-
-# Diretórios de include:
-# Todos os includes são feitos sem diretório (ex: #include "Disciplina.hpp"),
-# então precisamos adicionar TODOS os diretórios e subdiretórios de include/
+# =========================================
+# HEADERS: adicionar todos os diretórios onde há .hpp/.h
+# para suportar includes "Errors.hpp" etc.
+# =========================================
 file(GLOB_RECURSE HDRS CONFIGURE_DEPENDS
     ${CMAKE_SOURCE_DIR}/include/*.hpp
     ${CMAKE_SOURCE_DIR}/include/*.h
@@ -72,25 +107,49 @@ foreach(h ${HDRS})
 endforeach()
 list(REMOVE_DUPLICATES HEADER_DIRS)
 
-target_include_directories(historico PRIVATE
-    ${HEADER_DIRS}
-)
+# Aplica aos alvos relevantes
+target_include_directories(historico PRIVATE ${HEADER_DIRS})
 
+# Se os targets existirem, herdando os mesmos includes:
+if (TARGET repo_memory)
+    target_include_directories(repo_memory PUBLIC ${HEADER_DIRS})
+endif()
+
+if (TARGET ui_console)
+    target_include_directories(ui_console PUBLIC ${HEADER_DIRS})
+endif()
+
+if (TARGET ui_terminal)
+    target_include_directories(ui_terminal PUBLIC ${HEADER_DIRS})
+endif()
+
+if (TARGET ui_cpp_terminal)
+    target_include_directories(ui_cpp_terminal PUBLIC ${HEADER_DIRS})
+endif()
+
+if (TARGET ui_ftxui)
+    target_include_directories(ui_ftxui PUBLIC ${HEADER_DIRS})
+endif()
+
+
+# =========================================
 # Warnings
+# =========================================
 if (MSVC)
     target_compile_options(historico PRIVATE /W4)
 else()
     target_compile_options(historico PRIVATE -Wall -Wextra)
 endif()
 
-# Otimizações e linkagem estática (focado em MinGW; ajusta conforme necessidade)
+# =========================================
+# MinGW: otimização + link estático opcional
+# =========================================
 if (MINGW)
     target_compile_options(historico PRIVATE
         -Os
         -ffunction-sections
         -fdata-sections
     )
-
     target_link_options(historico PRIVATE
         -static
         -static-libgcc
@@ -100,21 +159,9 @@ if (MINGW)
     )
 endif()
 
-# FTXUI (quando for usar, descomentar e ajustar)
-# include(FetchContent)
-# FetchContent_Declare(
-#   ftxui
-#   GIT_REPOSITORY https://github.com/ArthurSonzogni/FTXUI.git
-#   GIT_TAG v6.1.9
-# )
-# FetchContent_MakeAvailable(ftxui)
-# target_link_libraries(historico PRIVATE
-#   ftxui::screen
-#   ftxui::dom
-#   ftxui::component
-# )
-
-# Windows: definir macro para consoles com suporte VT (se usar FTXUI/cores ANSI)
+# =========================================
+# Windows: suporte VT/ANSI
+# =========================================
 if (WIN32)
-    add_definitions(-DFTXUI_MICROSOFT_CONSOLE)
+    target_compile_definitions(historico PRIVATE FTXUI_MICROSOFT_CONSOLE)
 endif()

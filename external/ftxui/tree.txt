@@ -1,0 +1,258 @@
+Listagem de caminhos de pasta para o volume Projetos
+O número de série do volume é 000001DF 4E23:5370
+D:.
+¦   .clang-format
+¦   .clang-tidy
+¦   .gitignore
+¦   CHANGELOG.md
+¦   CMakeLists.txt
+¦   codecov.yml
+¦   flake.lock
+¦   flake.nix
+¦   ftxui.pc.in
+¦   iwyu.imp
+¦   LICENSE
+¦   README.md
+¦   tree.txt
+¦   WORKSPACE.bazel
+¦   
++---cmake
+¦       ftxui-config.cmake.in
+¦       ftxui_benchmark.cmake
+¦       ftxui_coverage.cmake
+¦       ftxui_export.cmake
+¦       ftxui_find_google_benchmark.cmake
+¦       ftxui_find_google_test.cmake
+¦       ftxui_fuzzer.cmake
+¦       ftxui_install.cmake
+¦       ftxui_message.cmake
+¦       ftxui_modules.cmake
+¦       ftxui_package.cmake
+¦       ftxui_set_options.cmake
+¦       ftxui_test.cmake
+¦       iwyu.cmake
+¦       
++---include
+¦   +---ftxui
+¦       +---component
+¦       ¦       animation.hpp
+¦       ¦       captured_mouse.hpp
+¦       ¦       component.hpp
+¦       ¦       component_base.hpp
+¦       ¦       component_options.hpp
+¦       ¦       event.hpp
+¦       ¦       loop.hpp
+¦       ¦       mouse.hpp
+¦       ¦       receiver.hpp
+¦       ¦       screen_interactive.hpp
+¦       ¦       task.hpp
+¦       ¦       
+¦       +---dom
+¦       ¦       canvas.hpp
+¦       ¦       deprecated.hpp
+¦       ¦       direction.hpp
+¦       ¦       elements.hpp
+¦       ¦       flexbox_config.hpp
+¦       ¦       linear_gradient.hpp
+¦       ¦       node.hpp
+¦       ¦       requirement.hpp
+¦       ¦       selection.hpp
+¦       ¦       table.hpp
+¦       ¦       take_any_args.hpp
+¦       ¦       
+¦       +---screen
+¦       ¦       box.hpp
+¦       ¦       color.hpp
+¦       ¦       color_info.hpp
+¦       ¦       deprecated.hpp
+¦       ¦       image.hpp
+¦       ¦       pixel.hpp
+¦       ¦       screen.hpp
+¦       ¦       string.hpp
+¦       ¦       terminal.hpp
+¦       ¦       
+¦       +---util
+¦               autoreset.hpp
+¦               ref.hpp
+¦               warn_windows_macro.hpp
+¦               
++---src
+    +---ftxui
+        ¦   component.cppm
+        ¦   dom.cppm
+        ¦   ftxui.cppm
+        ¦   screen.cppm
+        ¦   util.cppm
+        ¦   
+        +---component
+        ¦       animation.cpp
+        ¦       animation.cppm
+        ¦       animation_test.cpp
+        ¦       button.cpp
+        ¦       button_test.cpp
+        ¦       captured_mouse.cppm
+        ¦       catch_event.cpp
+        ¦       checkbox.cpp
+        ¦       collapsible.cpp
+        ¦       collapsible_test.cpp
+        ¦       component.cpp
+        ¦       component.cppm
+        ¦       component_base.cppm
+        ¦       component_fuzzer.cpp
+        ¦       component_options.cpp
+        ¦       component_options.cppm
+        ¦       component_test.cpp
+        ¦       container.cpp
+        ¦       container_test.cpp
+        ¦       dropdown.cpp
+        ¦       dropdown_test.cpp
+        ¦       event.cpp
+        ¦       event.cppm
+        ¦       hoverable.cpp
+        ¦       hoverable_test.cpp
+        ¦       input.cpp
+        ¦       input_test.cpp
+        ¦       loop.cpp
+        ¦       loop.cppm
+        ¦       maybe.cpp
+        ¦       menu.cpp
+        ¦       menu_test.cpp
+        ¦       modal.cpp
+        ¦       modal_test.cpp
+        ¦       mouse.cppm
+        ¦       radiobox.cpp
+        ¦       radiobox_test.cpp
+        ¦       receiver.cppm
+        ¦       renderer.cpp
+        ¦       resizable_split.cpp
+        ¦       resizable_split_test.cpp
+        ¦       screen_interactive.cpp
+        ¦       screen_interactive.cppm
+        ¦       screen_interactive_piped_input_test.cpp
+        ¦       screen_interactive_test.cpp
+        ¦       slider.cpp
+        ¦       slider_test.cpp
+        ¦       task.cpp
+        ¦       task.cppm
+        ¦       task_internal.hpp
+        ¦       task_queue.cpp
+        ¦       task_queue.hpp
+        ¦       task_runner.cpp
+        ¦       task_runner.hpp
+        ¦       task_test.cpp
+        ¦       terminal_input_parser.cpp
+        ¦       terminal_input_parser.hpp
+        ¦       terminal_input_parser_test.cpp
+        ¦       terminal_input_parser_test_fuzzer.cpp
+        ¦       toggle_test.cpp
+        ¦       util.cpp
+        ¦       window.cpp
+        ¦       
+        +---dom
+        ¦       automerge.cpp
+        ¦       benchmark_test.cpp
+        ¦       blink.cpp
+        ¦       blink_test.cpp
+        ¦       bold.cpp
+        ¦       bold_test.cpp
+        ¦       border.cpp
+        ¦       border_test.cpp
+        ¦       box_helper.cpp
+        ¦       box_helper.hpp
+        ¦       canvas.cpp
+        ¦       canvas.cppm
+        ¦       canvas_test.cpp
+        ¦       clear_under.cpp
+        ¦       color.cpp
+        ¦       color_test.cpp
+        ¦       composite_decorator.cpp
+        ¦       dbox.cpp
+        ¦       dbox_test.cpp
+        ¦       deprecated.cppm
+        ¦       dim.cpp
+        ¦       dim_test.cpp
+        ¦       direction.cppm
+        ¦       elements.cppm
+        ¦       flex.cpp
+        ¦       flexbox.cpp
+        ¦       flexbox_config.cpp
+        ¦       flexbox_config.cppm
+        ¦       flexbox_helper.cpp
+        ¦       flexbox_helper.hpp
+        ¦       flexbox_helper_test.cpp
+        ¦       flexbox_test.cpp
+        ¦       focus.cpp
+        ¦       frame.cpp
+        ¦       gauge.cpp
+        ¦       gauge_test.cpp
+        ¦       graph.cpp
+        ¦       gridbox.cpp
+        ¦       gridbox_test.cpp
+        ¦       hbox.cpp
+        ¦       hbox_test.cpp
+        ¦       hyperlink.cpp
+        ¦       hyperlink_test.cpp
+        ¦       inverted.cpp
+        ¦       italic.cpp
+        ¦       italic_test.cpp
+        ¦       linear_gradient.cpp
+        ¦       linear_gradient.cppm
+        ¦       linear_gradient_test.cpp
+        ¦       node.cpp
+        ¦       node.cppm
+        ¦       node_decorator.cpp
+        ¦       node_decorator.hpp
+        ¦       paragraph.cpp
+        ¦       reflect.cpp
+        ¦       requirement.cppm
+        ¦       scroll_indicator.cpp
+        ¦       scroll_indicator_test.cpp
+        ¦       selection.cpp
+        ¦       selection.cppm
+        ¦       selection_style.cpp
+        ¦       selection_test.cpp
+        ¦       separator.cpp
+        ¦       separator_test.cpp
+        ¦       size.cpp
+        ¦       spinner.cpp
+        ¦       spinner_test.cpp
+        ¦       strikethrough.cpp
+        ¦       table.cpp
+        ¦       table.cppm
+        ¦       table_test.cpp
+        ¦       text.cpp
+        ¦       text_test.cpp
+        ¦       underlined.cpp
+        ¦       underlined_double.cpp
+        ¦       underlined_test.cpp
+        ¦       util.cpp
+        ¦       vbox.cpp
+        ¦       vbox_test.cpp
+        ¦       
+        +---screen
+        ¦       box.cpp
+        ¦       box.cppm
+        ¦       color.cpp
+        ¦       color.cppm
+        ¦       color_info.cpp
+        ¦       color_info.cppm
+        ¦       color_test.cpp
+        ¦       deprecated.cppm
+        ¦       image.cpp
+        ¦       image.cppm
+        ¦       pixel.cppm
+        ¦       screen.cpp
+        ¦       screen.cppm
+        ¦       string.cpp
+        ¦       string.cppm
+        ¦       string_internal.hpp
+        ¦       string_test.cpp
+        ¦       terminal.cpp
+        ¦       terminal.cppm
+        ¦       util.hpp
+        ¦       
+        +---util
+                autoreset.cppm
+                ref.cppm
+                ref_test.cpp
+                

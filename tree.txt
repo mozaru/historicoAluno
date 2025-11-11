@@ -1,85 +1,203 @@
 historicoAluno
-¦   .gitignore
-¦   arquitetura.md
-¦   CMakeLists.txt
-¦   LICENSE
-¦   Makefile
-¦   patterns.md
-¦   README.md
-¦   tree.txt
-¦   visao_escopo.md
-¦   
+|   .gitignore
+|   arquitetura.md
+|   CMakeLists.txt
+|   InterfaceComUsuario.md
+|   LICENSE
+|   Makefile
+|   patterns.md
+|   README.md
+|   tree.txt
+|   visao_escopo.md
+|   
++---external
+|   +---cpp-terminal
+|       |   .clang-format
+|       |   .clang-tidy
+|       |   .cmake-format.yml
+|       |   .cmake-linter.yml
+|       |   .codespellignore
+|       |   .codespellrc
+|       |   .editorconfig
+|       |   .gitignore
+|       |   .LICENSE
+|       |   .pre-commit-config.yaml
+|       |   CMakeLists.txt
+|       |   LICENSE
+|       |   README.md
+|       |   
+|       +---cmake
+|       |       cpp-terminalConfig.cmake.in
+|       |       Warnings.cmake
+|       |       
+|       +---cpp-terminal
+|           |   args.cpp
+|           |   args.hpp
+|           |   buffer.cpp
+|           |   buffer.hpp
+|           |   CMakeLists.txt
+|           |   color.cpp
+|           |   color.hpp
+|           |   cursor.cpp
+|           |   cursor.hpp
+|           |   event.cpp
+|           |   event.hpp
+|           |   exception.hpp
+|           |   focus.cpp
+|           |   focus.hpp
+|           |   input.hpp
+|           |   iostream.cpp
+|           |   iostream.hpp
+|           |   iostream_initializer.cpp
+|           |   iostream_initializer.hpp
+|           |   key.cpp
+|           |   key.hpp
+|           |   mouse.cpp
+|           |   mouse.hpp
+|           |   options.cpp
+|           |   options.hpp
+|           |   position.hpp
+|           |   prompt.cpp
+|           |   prompt.hpp
+|           |   screen.cpp
+|           |   screen.hpp
+|           |   size.hpp
+|           |   stream.cpp
+|           |   stream.hpp
+|           |   style.cpp
+|           |   style.hpp
+|           |   terminal.cpp
+|           |   terminal.hpp
+|           |   terminal_impl.cpp
+|           |   terminal_impl.hpp
+|           |   terminal_initializer.cpp
+|           |   terminal_initializer.hpp
+|           |   terminfo.hpp
+|           |   tty.hpp
+|           |   version.hpp
+|           |   window.cpp
+|           |   window.hpp
+|           |   
+|           +---private
+|                   args.cpp
+|                   blocking_queue.cpp
+|                   blocking_queue.hpp
+|                   CMakeLists.txt
+|                   conversion.cpp
+|                   conversion.hpp
+|                   cursor.cpp
+|                   env.cpp
+|                   env.hpp
+|                   exception.cpp
+|                   exception.hpp
+|                   file.cpp
+|                   file.hpp
+|                   file_initializer.cpp
+|                   file_initializer.hpp
+|                   input.cpp
+|                   input.hpp
+|                   macros.hpp
+|                   README.md
+|                   return_code.cpp
+|                   return_code.hpp
+|                   screen.cpp
+|                   signals.cpp
+|                   signals.hpp
+|                   sigwinch.cpp
+|                   sigwinch.hpp
+|                   terminal_impl.cpp
+|                   terminfo.cpp
+|                   tty.cpp
+|                   unicode.cpp
+|                   unicode.hpp
+|                   version.cpp.in
+|                   
 +---include
-¦   +---core
-¦   ¦       Conversion.hpp
-¦   ¦       Errors.hpp
-¦   ¦       
-¦   +---entities
-¦   ¦       Disciplina.hpp
-¦   ¦       
-¦   +---logging
-¦   ¦       ILogger.hpp
-¦   ¦       
-¦   +---repositories
-¦   ¦       IDisciplinaRepository.hpp
-¦   ¦       
-¦   +---services
-¦   ¦       IHistoricoService.hpp
-¦   ¦       
-¦   +---uis
-¦           IUserInterface.hpp
-¦           
+|   +---core
+|   |       Conversion.hpp
+|   |       Errors.hpp
+|   |       
+|   +---entities
+|   |       Disciplina.hpp
+|   |       
+|   +---logging
+|   |       ILogger.hpp
+|   |       
+|   +---repositories
+|   |       IDisciplinaRepository.hpp
+|   |       
+|   +---services
+|   |       IHistoricoService.hpp
+|   |       
+|   +---uis
+|           IUserInterface.hpp
+|           
 +---src
-    ¦   main.cpp
-    ¦   
+    |   main.cpp
+    |   
     +---core
-    ¦       Conversion.cpp
-    ¦       
+    |       Conversion.cpp
+    |       
     +---entities
-    ¦       Disciplina.cpp
-    ¦       
+    |       Disciplina.cpp
+    |       
     +---logging
-    ¦       ConsoleLogger.cpp
-    ¦       ConsoleLogger.hpp
-    ¦       FileLogger.cpp
-    ¦       FileLogger.hpp
-    ¦       
+    |       ConsoleLogger.cpp
+    |       ConsoleLogger.hpp
+    |       FileLogger.cpp
+    |       FileLogger.hpp
+    |       
     +---repositories
-    ¦   +---bin
-    ¦   +---cvs
-    ¦   +---fixed
-    ¦   +---json
-    ¦   +---memory
-    ¦   ¦       MemoryDisciplinaRepository.cpp
-    ¦   ¦       MemoryDisciplinaRepository.hpp
-    ¦   ¦       
-    ¦   +---sqlite
-    ¦   +---xml
+    |   +---bin
+    |   +---cvs
+    |   +---fixed
+    |   +---json
+    |   +---memory
+    |   |       MemoryDisciplinaRepository.cpp
+    |   |       MemoryDisciplinaRepository.hpp
+    |   |       
+    |   +---sqlite
+    |   +---xml
     +---services
-    ¦       HistoricoService.cpp
-    ¦       HistoricoService.hpp
-    ¦       
+    |       HistoricoService.cpp
+    |       HistoricoService.hpp
+    |       
     +---uis
         +---console
-        ¦       UIConsole.cpp
-        ¦       UIConsole.hpp
-        ¦       
+        |       UIConsole.cpp
+        |       UIConsole.hpp
+        |       
         +---cpp-terminal
+        |       CppTermConfirmDialog.cpp
+        |       CppTermConfirmDialog.hpp
+        |       CppTermDisciplinaForm.cpp
+        |       CppTermDisciplinaForm.hpp
+        |       CppTermHomeScreen.cpp
+        |       CppTermHomeScreen.hpp
+        |       CppTermMessageDialog.cpp
+        |       CppTermMessageDialog.hpp
+        |       CppTermTypes.hpp
+        |       CppTermWindowUtils.cpp
+        |       CppTermWindowUtils.hpp
+        |       readme.md
+        |       UICppTerminal.cpp
+        |       UICppTerminal.hpp
+        |       
         +---ftxui
         +---not-cursors
         +---terminal
-        ¦       IUITerminalForm.hpp
-        ¦       terminal.cpp
-        ¦       terminal.hpp
-        ¦       UITerminal.cpp
-        ¦       UITerminal.hpp
-        ¦       UITerminalForm.cpp
-        ¦       UITerminalForm.hpp
-        ¦       UITerminalList.cpp
-        ¦       UITerminalList.hpp
-        ¦       UITerminalMenu.cpp
-        ¦       UITerminalMenu.hpp
-        ¦       UITerminalMessage.cpp
-        ¦       UITerminalMessage.hpp
-        ¦       
+        |       IUITerminalForm.hpp
+        |       terminal.cpp
+        |       terminal.hpp
+        |       UITerminal.cpp
+        |       UITerminal.hpp
+        |       UITerminalForm.cpp
+        |       UITerminalForm.hpp
+        |       UITerminalList.cpp
+        |       UITerminalList.hpp
+        |       UITerminalMenu.cpp
+        |       UITerminalMenu.hpp
+        |       UITerminalMessage.cpp
+        |       UITerminalMessage.hpp
+        |       
         +---web

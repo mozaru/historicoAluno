@@ -7,6 +7,7 @@
 #include "MemoryDisciplinaRepository.hpp"
 #include "HistoricoService.hpp"
 #include "FileLogger.hpp"
+#include "ConsoleLogger.hpp"
 
 #if defined(UI_IMPLEMENTATION_CONSOLE)
     #include "UIConsole.hpp"
@@ -22,7 +23,7 @@
 
 #elif defined(UI_IMPLEMENTATION_FTXUI)
     #include "UIFtxui.hpp"
-    using UIType = UIFtxui;          // ajustar quando implementar
+    using UIType = ui::ftxuiui::UIFtxui;          // ajustar quando implementar
 
 #elif defined(UI_IMPLEMENTATION_NOT_CURSORS)
     #include "UINotCursors.hpp"
@@ -40,6 +41,7 @@ int main(int argc, char** argv)
     // 1. Configurar logger (ex: baseado em -v)
     bool verbose = (argc > 1 && std::string(argv[1]) == "-v");
     FileLogger logger(verbose);
+    //ConsoleLogger logger(verbose);
 
     // 2. Escolher e criar o repositório ativo
     MemoryDisciplinaRepository repo(logger);
