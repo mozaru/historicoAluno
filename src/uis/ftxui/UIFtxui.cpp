@@ -135,7 +135,8 @@ void UIFtxui::run() {
                 int novoId = historicoService.insert(d);
                 d.setId(novoId);
 
-                state.AddOrUpdateDisciplina(d);
+                auto list = historicoService.list();
+                state.SetAll(list);
                 state.SetStatus("Disciplina inserida com sucesso (id=" + toString(novoId) + ").");
 
                 LOG_INF("UIFtxui: insercao concluida id=", novoId)
@@ -205,7 +206,9 @@ void UIFtxui::run() {
                 Disciplina atualizado = d_editado;
                 atualizado.setId(id);
 
-                state.AddOrUpdateDisciplina(atualizado);
+                //state.AddOrUpdateDisciplina(atualizado);
+                auto list = historicoService.list();
+                state.SetAll(list);
                 state.SetStatus("Disciplina atualizada com sucesso (id=" + toString(id) + ").");
 
                 LOG_INF("UIFtxui: atualizacao concluida id=", id)
@@ -273,7 +276,9 @@ void UIFtxui::run() {
         opts.on_confirm = [&,id]() {
             try {
                 historicoService.remove(id);
-                state.RemoveDisciplinaById(id);
+                auto list = historicoService.list();
+                state.SetAll(list);
+                //state.RemoveDisciplinaById(id);
                 state.SetStatus("Disciplina removida com sucesso (id=" + toString(id) + ").");
 
                 LOG_INF("UIFtxui: remocao concluida id=", id)
