@@ -109,8 +109,10 @@ elseif (UI_IMPLEMENTATION STREQUAL "ftxui")
     target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_FTXUI)
     target_link_libraries(historico PRIVATE ui_ftxui)
 
-elseif (UI_IMPLEMENTATION STREQUAL "not-cursors")
-    message(FATAL_ERROR "UI_IMPLEMENTATION=not-cursors ainda nao implementada.")
+elseif (UI_IMPLEMENTATION STREQUAL "notcurses")
+    add_subdirectory(${CMAKE_SOURCE_DIR}/src/uis/notcurses)
+    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_NOTCURSES)
+    target_link_libraries(historico PRIVATE ui_notcurses)
 
 elseif (UI_IMPLEMENTATION STREQUAL "web")
     message(FATAL_ERROR "UI_IMPLEMENTATION=web ainda nao implementada.")
@@ -184,6 +186,10 @@ endif()
 
 if (TARGET ui_ftxui)
     target_include_directories(ui_ftxui PUBLIC ${HEADER_DIRS})
+endif()
+
+if (TARGET ui_notcurses)
+    target_include_directories(ui_notcurses PUBLIC ${HEADER_DIRS})
 endif()
 
 

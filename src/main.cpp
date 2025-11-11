@@ -29,9 +29,9 @@
     #include "UIFtxui.hpp"
     using UIType = ui::ftxuiui::UIFtxui;          // ajustar quando implementar
 
-#elif defined(UI_IMPLEMENTATION_NOT_CURSORS)
-    #include "UINotCursors.hpp"
-    using UIType = UINotCursors;     // ajustar quando implementar
+#elif defined(UI_IMPLEMENTATION_NOTCURSES)
+    #include "UINotcurses.hpp"
+    using UIType = UINotcurses;     // ajustar quando implementar
 
 #elif defined(UI_IMPLEMENTATION_WEB)
     #include "UIWeb.hpp"
