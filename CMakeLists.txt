@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(historico_tui CXX)
+project(historico_tui CXX C)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -60,7 +60,12 @@ elseif (REPOSITORY_IMPLEMENTATION STREQUAL "fixed")
 elseif (REPOSITORY_IMPLEMENTATION STREQUAL "csv")
     add_subdirectory(${CMAKE_SOURCE_DIR}/src/repositories/csv)
     target_compile_definitions(historico PRIVATE REPOSITORY_IMPLEMENTATION_CSV)
-    target_link_libraries(historico PRIVATE repo_csv)    
+    target_link_libraries(historico PRIVATE repo_csv)   
+
+elseif (REPOSITORY_IMPLEMENTATION STREQUAL "sqlite")
+    add_subdirectory(${CMAKE_SOURCE_DIR}/src/repositories/sqlite)
+    target_compile_definitions(historico PRIVATE REPOSITORY_IMPLEMENTATION_SQLITE)
+    target_link_libraries(historico PRIVATE repo_sqlite)
 
 else()
     message(FATAL_ERROR "REPOSITORY_IMPLEMENTATION invalido: ${REPOSITORY_IMPLEMENTATION}")
@@ -141,6 +146,10 @@ endif()
 
 if (TARGET repo_csv)
     target_include_directories(repo_csv PUBLIC ${HEADER_DIRS})
+endif()
+
+if (TARGET repo_sqlite)
+    target_include_directories(repo_sqlite PUBLIC ${HEADER_DIRS})
 endif()
 
 if (TARGET ui_console)

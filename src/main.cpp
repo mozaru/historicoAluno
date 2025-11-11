@@ -61,8 +61,8 @@
     using RepType =JsonDisciplinaRepository;  // ajustar quando implementar
 
 #elif defined(REPOSITORY_IMPLEMENTATION_SQLITE)
-    #include "SqliteDiciplinaRepository.hpp"
-    using RepType = SqliteDisciplinaRepository;            // ajustar quando implementar
+    #include "SQLiteDisciplinaRepository.hpp"
+    using RepType = SQLiteDisciplinaRepository;            // ajustar quando implementar
 
 #elif defined(REPOSITORY_IMPLEMENTATION_XML)
     #include "XmlDisciplinaRepository.hpp"
