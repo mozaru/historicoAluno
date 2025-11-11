@@ -52,6 +52,11 @@ elseif (REPOSITORY_IMPLEMENTATION STREQUAL "bin")
     target_compile_definitions(historico PRIVATE REPOSITORY_IMPLEMENTATION_BINARY)
     target_link_libraries(historico PRIVATE repo_bin)
 
+elseif (REPOSITORY_IMPLEMENTATION STREQUAL "fixed")
+    add_subdirectory(${CMAKE_SOURCE_DIR}/src/repositories/fixed)
+    target_compile_definitions(historico PRIVATE REPOSITORY_IMPLEMENTATION_FIXED)
+    target_link_libraries(historico PRIVATE repo_fixed)
+
 else()
     message(FATAL_ERROR "REPOSITORY_IMPLEMENTATION invalido: ${REPOSITORY_IMPLEMENTATION}")
 endif()
@@ -124,6 +129,11 @@ endif()
 if (TARGET repo_bin)
     target_include_directories(repo_bin PUBLIC ${HEADER_DIRS})
 endif()
+
+if (TARGET repo_fixed)
+    target_include_directories(repo_fixed PUBLIC ${HEADER_DIRS})
+endif()
+
 
 if (TARGET ui_console)
     target_include_directories(ui_console PUBLIC ${HEADER_DIRS})
