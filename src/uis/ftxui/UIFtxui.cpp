@@ -79,7 +79,7 @@ private:
 // UIFtxui
 // -----------------------------------------------------------------------------
 
-UIFtxui::UIFtxui(IHistoricoService& service, ILogger& logger)
+UIFtxui::UIFtxui(IHistoricoService& service, ILogger& logger, const Configuracao& conf)
     : historicoService(service)
     , log(logger)
 {

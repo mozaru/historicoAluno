@@ -19,6 +19,8 @@ Configuracao::Configuracao(int argc,
     , logPath("")                       , logPathDefinida(false)
     , logPrefix("log_historico_")       , logPrefixDefinida(false)
     , logType("file")                   , logTypeDefinida(false) 
+    , webPathRoot("www")                , webPathRootDefinida(false)
+    , webPort(9090)                     , webPortDefinida(false)
 {
     // 1) Ambiente
     carregarDeAmbiente();
@@ -62,6 +64,15 @@ const std::string&  Configuracao::getLogType() const
 {
     return logType;
 }
+const std::string&  Configuracao::getWebPathRoot() const
+{
+    return webPathRoot;
+}
+int Configuracao::getWebPort() const
+{
+    return webPort;
+}
+
 // --------------------------------------------
 // Fonte: Ambiente
 // --------------------------------------------
@@ -143,6 +154,31 @@ void Configuracao::carregarDeAmbiente()
         {
             logPrefix = v;
             logPrefixDefinida = true;
+        }
+    }
+
+    if (!webPathRootDefinida)
+    {
+        const char* v = std::getenv("WEB_PATH_ROOT");
+        if (!v)
+            v = std::getenv("WEB_PATH_ROOT"); // tolera typo
+
+        if (v && *v)
+        {
+            webPathRoot = v;
+            webPathRootDefinida = true;
+        }
+    }
+    if (!webPortDefinida)
+    {
+        const char* v = std::getenv("WEB_PORT");
+        if (!v)
+            v = std::getenv("WEB_PORT"); // tolera typo
+
+        if (v && *v)
+        {
+            webPort = std::stoi( v );
+            webPortDefinida = true;
         }
     }
 }
@@ -282,6 +318,22 @@ void Configuracao::aplicarPar(const std::string& chave, const std::string& valor
         {
             logPath = valor;
             logPathDefinida = true;
+        }
+    }
+    else if (keyUpper == "WEB_PATH_ROOT" && !webPathRootDefinida)
+    {
+        if (!valor.empty())
+        {
+            webPathRoot = valor;
+            webPathRootDefinida = true;
+        }
+    }
+    else if (keyUpper == "WEB_PORT" && !webPortDefinida)
+    {
+        if (!valor.empty())
+        {
+            webPort = std::stoi(valor);
+            webPortDefinida = true;
         }
     }
 }

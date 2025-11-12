@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Histórico Aluno</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- HOME (sempre visível) -->
+    <header class="app-header" aria-label="título da aplicação">
+      <h1>Histórico do Aluno</h1>
+      <div class="cr-pill" id="crPill" aria-live="polite" title="Coeficiente de Rendimento">CR: --</div>
+    </header>
+
+    <section class="toolbar" aria-label="filtro e ações">
+      <label for="filtro" class="sr-only">Filtro</label>
+      <input id="filtro" type="search" placeholder="Filtrar por nome, matrícula, ano/sem..." autocomplete="off">
+      <button id="btnFiltrar" class="btn primary" data-action="filtrar">
+        <span class="btn-icon" aria-hidden="true">🔎</span> Filtrar
+      </button>
+      <div class="spacer"></div>
+      <button id="btnInserir" class="btn success" data-action="inserir">
+        <span class="btn-icon" aria-hidden="true">＋</span> Inserir
+      </button>
+    </section>
+
+    <section class="table-wrapper" aria-label="lista de disciplinas">
+      <table id="grid" class="grid" aria-describedby="gridHelp" role="grid">
+        <thead>
+          <tr role="row">
+            <th scope="col" class="col-id">ID</th>
+            <th scope="col" class="col-matricula">Matrícula</th>
+            <th scope="col" class="col-nome">Nome</th>
+            <th scope="col" class="col-creditos">Créditos</th>
+            <th scope="col" class="col-ano">Ano</th>
+            <th scope="col" class="col-semestre">Semestre</th>
+            <th scope="col" class="col-media">Média</th>
+            <th scope="col" class="col-acoes">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="gridBody" role="rowgroup">
+          <!-- linhas dinâmicas -->
+        </tbody>
+      </table>
+      <p id="gridHelp" class="help">
+        Use ↑/↓ para navegar, Enter para editar, Del para remover, PgUp/PgDn para rolar.
+      </p>
+    </section>
+
+    <footer class="app-footer">
+      <div class="credits">
+        <span>Autor: Mozar Baptista da Silva</span>
+        <span>11/2025</span>
+        <span><a href="mailto:mozar.silva@gmail.com">mozar.silva@gmail.com</a></span> 
+        <span><a href="https://www.11tech.com.br" target="_blank" rel="noopener">www.11tech.com.br</a></span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- DIALOG CONTAINER (modais) -->
+  <div id="modalHost" class="modal-host" aria-live="assertive"></div>
+
+  <template id="tplDialogBase">
+    <div class="modal-backdrop" data-modal-backdrop></div>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <header class="modal-header">
+        <h2 id="modalTitle"></h2>
+      </header>
+      <div class="modal-body" id="modalBody"></div>
+      <footer class="modal-footer" id="modalFooter"></footer>
+    </div>
+  </template>
+
+  <template id="tplFormDisciplina">
+    <form id="formDisciplina" class="form-grid">
+      <label>Nome
+        <input name="nome" required maxlength="120" autocomplete="off">
+      </label>
+      <label>Matrícula
+        <input name="matricula" required pattern="\\d{5,}" inputmode="numeric">
+      </label>
+      <label>Créditos
+        <input name="creditos" required type="number" min="0" step="1">
+      </label>
+      <label>Ano
+        <input name="ano" required type="number" min="1900" step="1">
+      </label>
+      <label>Semestre
+        <input name="semestre" required type="number" min="1" max="2" step="1">
+      </label>
+      <label>Nota 1
+        <input name="nota1" required type="number" min="0" max="10" step="0.01">
+      </label>
+      <label>Nota 2
+        <input name="nota2" required type="number" min="0" max="10" step="0.01">
+      </label>
+    </form>
+  </template>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

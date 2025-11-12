@@ -25,7 +25,7 @@
 // Construtor / Destrutor
 // ---------------------------------------------------------------------
 
-UICppTerminal::UICppTerminal(IHistoricoService& service, ILogger& logger)
+UICppTerminal::UICppTerminal(IHistoricoService& service, ILogger& logger, const Configuracao& conf)
     : historicoService(service),
       log(logger),
       deveSair(false)

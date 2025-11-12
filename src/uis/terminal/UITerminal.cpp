@@ -14,7 +14,7 @@
 
 using namespace std;
 
-UITerminal::UITerminal(IHistoricoService& aHistoricoService, ILogger& aLog)
+UITerminal::UITerminal(IHistoricoService& aHistoricoService, ILogger& aLog, const Configuracao& conf)
     : historicoService(aHistoricoService), log(aLog)
 {
     Terminal::init();

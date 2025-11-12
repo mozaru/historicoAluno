@@ -167,30 +167,29 @@ std::string HistoricoService::trim(const std::string& s)
 
 void HistoricoService::validarDisciplina(const Disciplina& d)
 {
-    const int anoMin = 2000;
+    const int anoMin = 1900;
     const int anoMax = anoCorrente();
 
     // Nome
     const std::string nome = trim(d.getNome());
-    if (nome.size() < 3 || nome.size() > 30) {
+    if (nome.size() < 3 || nome.size() > 50) {
         LOG_DBG("validarDisciplina: nome invalido (len=", nome.size(), ")")
         throw BusinessError(
-            "Nome da disciplina deve ter entre 3 e 30 caracteres.");
+            "Nome da disciplina deve ter entre 3 e 50 caracteres.");
     }
 
-    // Matricula (aqui so garantimos nao-vazio; regras extras podem ser adicionadas)
     const std::string matricula = trim(d.getMatricula());
-    if (matricula.empty()) {
-        LOG_DBG("validarDisciplina: matricula vazia")
+    if (matricula.empty() || matricula.size() > 20) {
+        LOG_DBG("validarDisciplina: matricula invalida (len=", matricula.size(), ")")
         throw BusinessError(
-            "Matricula da disciplina nao pode ser vazia.");
+            "Matricula da disciplina nao pode ser vazia e nao pode ter mais de 20 caracteres.");
     }
 
     // Ano
     if (d.getAno() < anoMin || d.getAno() > anoMax) {
         LOG_DBG("validarDisciplina: ano invalido=", d.getAno())
         throw BusinessError(
-            "Ano invalido. Deve estar entre 2000 e o ano corrente.");
+            "Ano invalido. Deve estar entre 1900 e o ano corrente.");
     }
 
     // Semestre

@@ -6,6 +6,7 @@
 #include"Disciplina.hpp"
 #include"IUserInterface.hpp"
 #include"IHistoricoService.hpp"
+#include"Configuracao.hpp"
 
 class UITerminal : public IUserInterface 
 {
@@ -19,7 +20,7 @@ class UITerminal : public IUserInterface
         void mostrarInfo(std::string info) const;
         void mostrarAlerta(std::string info) const;
     public:
-        UITerminal(IHistoricoService& aHistoricoService, ILogger& aLog);
+        UITerminal(IHistoricoService& aHistoricoService, ILogger& aLog, const Configuracao& conf);
         void run();
 };
 

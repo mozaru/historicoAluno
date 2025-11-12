@@ -1,11 +1,12 @@
 #ifndef _UI_CONSOLE_HPP_
 #define _UI_CONSOLE_HPP_
 
-#include<string>
+#include <string>
 #include "ILogger.hpp"
-#include"Disciplina.hpp"
-#include"IUserInterface.hpp"
-#include"IHistoricoService.hpp"
+#include "Disciplina.hpp"
+#include "IUserInterface.hpp"
+#include "IHistoricoService.hpp"
+#include "Configuracao.hpp"
 
 class UIConsole : public IUserInterface
 {
@@ -20,7 +21,7 @@ class UIConsole : public IUserInterface
         void mostrarInfo(std::string info) const;
         void mostrarAlerta(std::string info) const;
     public:
-        UIConsole(IHistoricoService& aHistoricoService, ILogger& aLog);
+        UIConsole(IHistoricoService& aHistoricoService, ILogger& aLog, const Configuracao& conf);
         void run();
 };     
 

@@ -22,6 +22,8 @@ public:
     const std::string& getLogPath() const;
     const std::string& getLogPrefix() const;
     const std::string& getLogType() const;
+    const std::string& getWebPathRoot() const;
+    int getWebPort() const;
 
 private:
     bool verbose;
@@ -42,6 +44,11 @@ private:
     std::string logType;
     bool logTypeDefinida;
 
+    std::string webPathRoot;
+    bool webPathRootDefinida;
+
+    int webPort;
+    bool webPortDefinida;
 
     void carregarDeAmbiente();
     void carregarDeArquivo(const std::string& path);

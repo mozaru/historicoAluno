@@ -12,7 +12,7 @@
 
 using namespace std;
 
-UIConsole::UIConsole(IHistoricoService& aHistoricoService, ILogger& aLog)
+UIConsole::UIConsole(IHistoricoService& aHistoricoService, ILogger& aLog, const Configuracao& conf)
     : historicoService(aHistoricoService), log(aLog)
 {}
 

@@ -11,4 +11,5 @@ target_include_directories(ui_cpp_terminal
     PUBLIC
         ${CMAKE_SOURCE_DIR}/include
         ${CMAKE_SOURCE_DIR}/src
+        ${CMAKE_SOURCE_DIR}/external/cpp-terminal
 )

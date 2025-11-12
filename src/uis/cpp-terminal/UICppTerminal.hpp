@@ -7,6 +7,7 @@
 #include "IHistoricoService.hpp"
 #include "ILogger.hpp"
 #include "Disciplina.hpp"
+#include "Configuracao.hpp"
 #include "CppTermTypes.hpp"
 
 // Forward declarations das telas específicas.
@@ -25,7 +26,7 @@ class CppTermMessageDialog;
 class UICppTerminal : public IUserInterface
 {
 public:
-    UICppTerminal(IHistoricoService& service, ILogger& logger);
+    UICppTerminal(IHistoricoService& service, ILogger& logger, const Configuracao& conf);
     virtual ~UICppTerminal();
 
     void run() override;

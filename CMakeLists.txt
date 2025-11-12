@@ -110,8 +110,9 @@ elseif (UI_IMPLEMENTATION STREQUAL "ftxui")
     target_link_libraries(historico PRIVATE ui_ftxui)
 
 elseif (UI_IMPLEMENTATION STREQUAL "web")
-    message(FATAL_ERROR "UI_IMPLEMENTATION=web ainda nao implementada.")
-
+    add_subdirectory(${CMAKE_SOURCE_DIR}/src/uis/web)
+    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_WEB)
+    target_link_libraries(historico PRIVATE ui_web)
 else()
     message(FATAL_ERROR "UI_IMPLEMENTATION invalido: ${UI_IMPLEMENTATION}")
 endif()
@@ -183,8 +184,8 @@ if (TARGET ui_ftxui)
     target_include_directories(ui_ftxui PUBLIC ${HEADER_DIRS})
 endif()
 
-if (TARGET ui_notcurses)
-    target_include_directories(ui_notcurses PUBLIC ${HEADER_DIRS})
+if (TARGET ui_web)
+    target_include_directories(ui_web PUBLIC ${HEADER_DIRS})
 endif()
 
 

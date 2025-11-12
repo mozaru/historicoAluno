@@ -5,3 +5,5 @@ FILE_NAME=dados.bin
 LOG_TYPE=console
 LOG_PREFIX=log_historico
 LOG_PATH=
+WEB_PORT=9090
+WEB_WWW_ROOT=www

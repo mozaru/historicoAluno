@@ -87,7 +87,7 @@ int main(int argc, char** argv)
             HistoricoService historicoService(repo, log);
 
             // 4. Criar a UI concreta com as dependências
-            UIType ui(historicoService, log);
+            UIType ui(historicoService, log, config);
 
             // 5. Deixar a UI assumir o controle
             ui.run();
