@@ -113,6 +113,12 @@ elseif (UI_IMPLEMENTATION STREQUAL "web")
     add_subdirectory(${CMAKE_SOURCE_DIR}/src/uis/web)
     target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_WEB)
     target_link_libraries(historico PRIVATE ui_web)
+
+elseif (UI_IMPLEMENTATION STREQUAL "iup")
+    add_subdirectory(${CMAKE_SOURCE_DIR}/src/uis/iup)
+    target_compile_definitions(historico PRIVATE UI_IMPLEMENTATION_IUP)
+    target_link_libraries(historico PRIVATE ui_iup)
+
 else()
     message(FATAL_ERROR "UI_IMPLEMENTATION invalido: ${UI_IMPLEMENTATION}")
 endif()
@@ -188,6 +194,9 @@ if (TARGET ui_web)
     target_include_directories(ui_web PUBLIC ${HEADER_DIRS})
 endif()
 
+if (TARGET ui_iup)
+    target_include_directories(ui_iup PUBLIC ${HEADER_DIRS})
+endif()
 
 # =========================================
 # Warnings

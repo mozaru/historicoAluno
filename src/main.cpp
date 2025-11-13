@@ -32,6 +32,11 @@
 #elif defined(UI_IMPLEMENTATION_WEB)
     #include "UIWeb.hpp"
     using UIType = UIWeb;
+
+#elif defined(UI_IMPLEMENTATION_IUP)
+    #include "UIIup.hpp"
+    using UIType = UIIup;
+
 #else
     #error "Nenhuma UI_IMPLEMENTATION_* definida. Defina, por exemplo: -DUI_IMPLEMENTATION=console|terminal|cpp-terminal|ftxui|notcurser|web"
 #endif
